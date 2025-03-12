@@ -1,3 +1,4 @@
 theme: minima
 title: My Jekyll Website
 description: Welcome to my GitHub Pages site powered by Jekyll!
+remote_theme: jekyll/minima
