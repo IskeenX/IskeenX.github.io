@@ -1,165 +1,23 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
-        nav {
-            background: #222;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            background: #ff6b6b;
-            border-radius: 5px;
-        }
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-        }
-        .section {
-            display: none;
-            padding: 20px;
-        }
-        .active {
-            display: block;
-        }
-        .contact-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff6b6b, #556270);
-            color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .contact-container::before {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            top: -30px;
-            right: -30px;
-        }
-        .contact-container h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .contact-icons {
-            display: flex;
-            gap: 20px;
-        }
-        .contact-icons a {
-            font-size: 30px;
-            color: white;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-        .contact-icons a:hover {
-            transform: scale(1.2);
-            color: yellow;
-        }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 80%;
-            max-width: 400px;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            outline: none;
-            font-size: 1rem;
-        }
-        .contact-form button {
-            background: yellow;
-            color: #333;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .contact-form button:hover {
-            background: white;
-            color: black;
-        }
-    </style>
 </head>
 <body>
     <nav>
-        <a href="#" onclick="showSection('about')">About Me</a>
-        <a href="#" onclick="showSection('contact')">Contact Me</a>
-        <a href="#" onclick="showSection('experience')">Experience</a>
-        <a href="#" onclick="showSection('education')">Education</a>
-        <a href="#" onclick="showSection('personal')">Personal Life</a>
-        <a href="#" onclick="showSection('knowledge')">Life Hacks / Knowledge</a>
+        <a href="#" onclick="loadSection('about')">About Me</a>
+        <a href="#" onclick="loadSection('contact')">Contact Me</a>
+        <a href="#" onclick="loadSection('experience')">Experience</a>
+        <a href="#" onclick="loadSection('education')">Education</a>
+        <a href="#" onclick="loadSection('personal')">Personal Life</a>
+        <a href="#" onclick="loadSection('knowledge')">Life Hacks / Knowledge</a>
     </nav>
     
-    <div class="container">
-        <div id="contact" class="section active">
-            <div class="contact-container">
-                <h2>Let's Connect!</h2>
-                <div class="contact-icons">
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
-                    <a href="#"><i class="fas fa-envelope"></i></a>
-                </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea rows="3" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
-    </script>
+    <div id="content"></div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
