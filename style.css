@@ -236,6 +236,119 @@ nav a:hover {
     font-weight: bold;
 }
 
+/* Header */
+.personal-header {
+    text-align: center;
+    padding: 40px 20px;
+    background: #1e1e1e;
+}
+.personal-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+.personal-header p {
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+/* Hobbies Grid */
+.hobbies-section {
+    text-align: center;
+    padding: 40px;
+}
+.hobbies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.hobby {
+    width: 200px;
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+.hobby img {
+    width: 80px;
+    height: 80px;
+}
+.hobby h3 {
+    margin-top: 10px;
+}
+
+/* Achievements Timeline */
+.achievements {
+    text-align: center;
+    padding: 40px;
+}
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.milestone {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Travel */
+.travel {
+    text-align: center;
+    padding: 40px;
+}
+.travel img {
+    width: 80%;
+    border-radius: 10px;
+}
+
+/* Fun Facts */
+.fun-facts {
+    text-align: center;
+    padding: 40px;
+}
+.fun-facts ul {
+    list-style: none;
+    padding: 0;
+}
+.fun-facts li {
+    background: #222;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+}
+
+/* Bucket List */
+.bucket-list {
+    text-align: center;
+    padding: 40px;
+}
+.bucket-list ul {
+    list-style: none;
+    padding: 0;
+}
+.bucket-list li {
+    background: #222;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .education-timeline::before {
