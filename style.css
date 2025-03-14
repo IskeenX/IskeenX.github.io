@@ -122,17 +122,17 @@ nav a:hover {
 .education-header {
     text-align: center;
     padding: 60px 20px;
-    background: url('edu-header-bg.png') no-repeat center center/cover;
+    background: linear-gradient(to right, #222, #121212);
     color: #FFA500;
 }
-
 .education-header h1 {
     font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(255, 165, 0, 0.6);
 }
-
 .education-header p {
     font-size: 1.2rem;
     font-style: italic;
+    color: #ffcc80;
 }
 
 .education-section {
@@ -141,6 +141,7 @@ nav a:hover {
     padding: 40px 20px;
 }
 
+/* Education Card Styling */
 .edu-item {
     display: flex;
     align-items: center;
@@ -148,32 +149,36 @@ nav a:hover {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 30px;
-    box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
 }
-
 .edu-item:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
 }
-
-.edu-item img {
-    width: 150px;
-    height: 150px;
+.edu-icon {
+    min-width: 80px;
+    min-height: 80px;
+    background: rgba(255, 165, 0, 0.2);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 20px;
-    border: 3px solid #FFA500;
 }
-
+.edu-icon img {
+    width: 50px;
+    height: 50px;
+}
 .edu-text h2 {
     color: #FFA500;
     font-size: 1.8rem;
 }
-
 .edu-text h3 {
     color: #ffcc80;
     font-size: 1.2rem;
 }
-
 .edu-text p {
     font-size: 1rem;
     line-height: 1.5;
@@ -185,9 +190,9 @@ nav a:hover {
     .edu-item {
         flex-direction: column;
         text-align: center;
-    }    
-
-    .edu-item img {
+        padding: 30px;
+    }
+    .edu-icon {
         margin-bottom: 15px;
     }
 }
