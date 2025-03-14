@@ -122,8 +122,8 @@ nav a:hover {
 .education-header {
     text-align: center;
     padding: 70px 20px;
-    background: #111;  /* Pure dark background */
-    color: #E0E0E0; /* Softer white */
+    background: #111; /* Dark background */
+    color: #E0E0E0;
 }
 .education-header h1 {
     font-size: 3rem;
@@ -135,20 +135,22 @@ nav a:hover {
     color: #BBBBBB;
 }
 
-/* TIMELINE */
+/* TIMELINE STRUCTURE */
 .education-timeline {
     position: relative;
     max-width: 900px;
     margin: auto;
     padding: 50px 20px;
 }
+
+/* TIMELINE LINE */
 .education-timeline::before {
     content: "";
     position: absolute;
     left: 50%;
     width: 2px;
     height: 100%;
-    background: rgba(200, 200, 200, 0.3); /* Faint gray */
+    background: rgba(200, 200, 200, 0.3);
     transform: translateX(-50%);
 }
 
@@ -160,14 +162,15 @@ nav a:hover {
     position: relative;
     margin-bottom: 60px;
 }
-.timeline-item:nth-child(even) {
+.timeline-item.left {
     flex-direction: row-reverse;
-}
-.timeline-item:nth-child(even) .timeline-content {
     text-align: right;
 }
+.timeline-item.right {
+    flex-direction: row;
+}
 
-/* ICONS */
+/* TIMELINE ICONS */
 .timeline-icon {
     width: 50px;
     height: 50px;
@@ -186,7 +189,7 @@ nav a:hover {
     height: 35px;
 }
 
-/* CONTENT */
+/* TIMELINE CONTENT */
 .timeline-content {
     width: 45%;
     background: rgba(255, 255, 255, 0.05);
@@ -212,7 +215,7 @@ nav a:hover {
     line-height: 1.6;
 }
 
-/* IMAGES */
+/* IMAGE PLACEHOLDERS */
 .edu-image {
     margin-top: 15px;
 }
@@ -233,7 +236,7 @@ nav a:hover {
     font-weight: bold;
 }
 
-/* MOBILE RESPONSIVENESS */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .education-timeline::before {
         left: 30px;
