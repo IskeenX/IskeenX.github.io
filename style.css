@@ -5,13 +5,11 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
 body {
     background: #121212;
     color: white;
     text-align: center;
 }
-
 nav {
     background: #222;
     padding: 15px;
@@ -19,19 +17,16 @@ nav {
     justify-content: center;
     gap: 20px;
 }
-
 nav a {
     color: white;
     text-decoration: none;
     padding: 10px 15px;
     transition: 0.3s;
 }
-
 nav a:hover {
     background: #ff6b6b;
     border-radius: 5px;
 }
-
 .container {
     width: 90%;
     max-width: 1000px;
@@ -48,12 +43,10 @@ nav a:hover {
     padding: 50px 20px;
     background: url('images/contact-bg.jpg') center/cover no-repeat;
 }
-
 .contact-header h1 {
     font-size: 3rem;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
-
 .social-section {
     display: flex;
     flex-direction: column;
@@ -61,7 +54,6 @@ nav a:hover {
     margin: 20px auto;
     max-width: 800px;
 }
-
 .social-box {
     display: flex;
     align-items: center;
@@ -70,24 +62,20 @@ nav a:hover {
     border-radius: 10px;
     transition: 0.3s;
 }
-
 .social-box img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     margin-right: 15px;
 }
-
 .social-text {
     flex-grow: 1;
 }
-
 .social-link {
     color: #ff6b6b;
     text-decoration: none;
     font-weight: bold;
 }
-
 .contact-form {
     text-align: center;
     padding: 30px;
@@ -96,7 +84,6 @@ nav a:hover {
     max-width: 500px;
     margin: auto;
 }
-
 .contact-form input, .contact-form textarea {
     width: 100%;
     padding: 10px;
@@ -104,7 +91,6 @@ nav a:hover {
     border-radius: 5px;
     border: none;
 }
-
 .contact-form button {
     background: #ff6b6b;
     color: white;
@@ -113,7 +99,6 @@ nav a:hover {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .contact-form button:hover {
     background: #ff3838;
 }
@@ -122,7 +107,7 @@ nav a:hover {
 .education-header {
     text-align: center;
     padding: 70px 20px;
-    background: #111; /* Dark background */
+    background: #111;
     color: #E0E0E0;
 }
 .education-header h1 {
@@ -134,16 +119,12 @@ nav a:hover {
     font-style: italic;
     color: #BBBBBB;
 }
-
-/* TIMELINE STRUCTURE */
 .education-timeline {
     position: relative;
     max-width: 900px;
     margin: auto;
     padding: 50px 20px;
 }
-
-/* TIMELINE LINE */
 .education-timeline::before {
     content: "";
     position: absolute;
@@ -153,8 +134,6 @@ nav a:hover {
     background: rgba(200, 200, 200, 0.3);
     transform: translateX(-50%);
 }
-
-/* TIMELINE ITEMS */
 .timeline-item {
     display: flex;
     align-items: center;
@@ -169,8 +148,6 @@ nav a:hover {
 .timeline-item.right {
     flex-direction: row;
 }
-
-/* TIMELINE ICONS */
 .timeline-icon {
     width: 50px;
     height: 50px;
@@ -188,8 +165,6 @@ nav a:hover {
     width: 35px;
     height: 35px;
 }
-
-/* TIMELINE CONTENT */
 .timeline-content {
     width: 45%;
     background: rgba(255, 255, 255, 0.05);
@@ -214,8 +189,6 @@ nav a:hover {
     color: #CCCCCC;
     line-height: 1.6;
 }
-
-/* IMAGE PLACEHOLDERS */
 .edu-image {
     margin-top: 15px;
 }
@@ -225,8 +198,6 @@ nav a:hover {
     border-radius: 8px;
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
 }
-
-/* HIGHLIGHTS */
 .highlight {
     color: #E0E0E0;
     font-weight: bold;
@@ -236,107 +207,88 @@ nav a:hover {
     font-weight: bold;
 }
 
-/* Header */
+/* ===== PERSONAL LIFE ===== */
 .personal-header {
     text-align: center;
-    padding: 40px 20px;
-    background: #1e1e1e;
+    padding: 60px 20px;
+    background: linear-gradient(120deg, #1a1a1a, #222);
+    color: white;
 }
 .personal-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
-.personal-header p {
-    font-size: 1.2em;
-    opacity: 0.8;
+.personal-header .quote {
+    font-style: italic;
+    opacity: 0.7;
 }
-
-/* Hobbies Grid */
-.hobbies-section {
-    text-align: center;
-    padding: 40px;
+.personal-timeline-section {
+    padding: 50px 20px;
+    position: relative;
 }
-.hobbies-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-.hobby {
-    width: 200px;
-    background: #222;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-}
-.hobby img {
-    width: 80px;
-    height: 80px;
-}
-.hobby h3 {
-    margin-top: 10px;
-}
-
-/* Achievements Timeline */
-.achievements {
-    text-align: center;
-    padding: 40px;
-}
-.timeline {
+.personal-timeline-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    align-items: center;
 }
-.milestone {
-    background: #222;
-    padding: 15px;
+.personal-timeline-item {
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-}
-
-/* Travel */
-.travel {
-    text-align: center;
-    padding: 40px;
-}
-.travel img {
-    width: 80%;
-    border-radius: 10px;
-}
-
-/* Fun Facts */
-.fun-facts {
-    text-align: center;
-    padding: 40px;
-}
-.fun-facts ul {
-    list-style: none;
-    padding: 0;
-}
-.fun-facts li {
-    background: #222;
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
     width: 60%;
-}
-
-/* Bucket List */
-.bucket-list {
     text-align: center;
-    padding: 40px;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
 }
-.bucket-list ul {
-    list-style: none;
-    padding: 0;
+.personal-timeline-item:hover {
+    transform: scale(1.05);
 }
-.bucket-list li {
+.personal-hobbies-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+.personal-hobbies-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.personal-hobby {
+    width: 220px;
     background: #222;
-    margin: 10px auto;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+.personal-hobby:hover {
+    box-shadow: 0 0 20px #ff6b6b;
+    transform: scale(1.1);
+}
+.personal-stats-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(120deg, #111, #222);
+}
+.personal-stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+.personal-stat-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
     border-radius: 10px;
-    width: 60%;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+    width: 180px;
+}
+.personal-stat-box h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b6b;
 }
 
 
@@ -349,7 +301,7 @@ nav a:hover {
 
 
 
-/* RESPONSIVE DESIGN */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .education-timeline::before {
         left: 30px;
