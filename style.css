@@ -9,27 +9,6 @@ body {
     color: white;
     text-align: center;
 }
-nav {
-    background: #222;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    transition: 0.3s;
-}
-nav a:hover {
-    background: #ff6b6b;
-    border-radius: 5px;
-}
-nav a.active {
-    background: #ff6b6b;
-    border-radius: 5px;
-}
 .container {
     width: 90%;
     max-width: 1000px;
@@ -40,6 +19,35 @@ nav a.active {
     box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
+/* ===== NAVIGATION BAR ===== */
+.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1e1e1e;
+    border-radius: 10px;
+    position: relative;
+}
+.tabs button {
+    width: 33.3333%;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+.tabs .active {
+    background: #ff6b6b;
+    height: calc(100% - 10px);
+    width: calc(33.3333% - 10px);
+    position: absolute;
+    top: 5px;
+    left: 0;
+    transform: translateX(5px);
+    border-radius: inherit;
+    box-shadow: 0 2px 2px #161616;
+    transition: all 200ms;
+}
 /* ===== CONTACT ME ===== */
 .contact-header {
     text-align: center;
