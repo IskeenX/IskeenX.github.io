@@ -10,8 +10,8 @@ function loadSection(section) {
 const buttons = document.querySelectorAll("button");
 const active = document.querySelectorAll("active");
 for (let i = 0; i < buttons.length; i++) {
-    buttons[i].onclick = fuction () {
+    buttons[i].onclick = function () {
         let move = (100 / buttons.length) * i;
         active.style.left = move + "%";
-    }
+    };
 }
