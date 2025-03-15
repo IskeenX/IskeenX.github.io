@@ -26,6 +26,10 @@ nav a:hover {
     background: #ff6b6b;
     border-radius: 5px;
 }
+nav a.active {
+    background: #ff6b6b;
+    border-radius: 5px;
+}
 .container {
     width: 90%;
     max-width: 1000px;
