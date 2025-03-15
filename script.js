@@ -5,3 +5,13 @@ function loadSection(section) {
             document.getElementById('content').innerHTML = data;
         });
 }
+
+
+const buttons = document.querySelectorAll("button");
+const active = document.querySelectorAll("active");
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = fuction () {
+        let move = (100 / buttons.length) * i;
+        active.style.left = move + "%";
+    }
+}
