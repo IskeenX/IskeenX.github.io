@@ -1,23 +1,26 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="tabs">
-        <div class="active"></div>
-        <button href="#" onclick="loadSection('about')">About Me</button>
-        <button href="#" onclick="loadSection('contact')">Contact Me</button>
-        <button href="#" onclick="loadSection('experience')">Experience</button>
-        <button href="#" onclick="loadSection('education')">Education</button>
-        <button href="#" onclick="loadSection('personal')">Personal Life</button>
-        <button href="#" onclick="loadSection('knowledge')">Life Hacks / Knowledge</button>
-    </div>
-    <div id="content"></div>
-    
-    <script src="script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="nav" id="navbar">
+            <nav>
+                <a class="about" href="#" onclick="loadSection('about')">ABOUT ME</a>
+                <a class="contact" href="#" onclick="loadSection('contact')">CONTACTS</a>
+                <a class="experience" href="#" onclick="loadSection('experience')">EXPERIENCE</a>
+                <a class="education" href="#" onclick="loadSection('education')">EDUCATION</a>
+                <a class="personal" href="#" onclick="loadSection('personal')">MY LIFE</a>
+                <a class="knowledge" href="#" onclick="loadSection('knowledge')">KNOWLEDGE</a>
+                <span class="nav-slider"></span>
+            </nav>
+        </div>
+        <div class="container">
+            <div id="content"></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
 </html>
