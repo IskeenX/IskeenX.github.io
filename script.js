@@ -67,3 +67,8 @@ function loadSection(section) {
             document.getElementById('content').innerHTML = data;
         }).catch(error => console.error("Error loading page:", error));
 }
+// Function to scroll to target spot
+function scrollToSpot(spotNumber) {
+    let number_scroll = document.getElementById("spot" + spotNumber);
+    number_scroll.scrollIntoView({ behavior: "smooth", block: "center" });
+}
