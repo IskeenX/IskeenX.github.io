@@ -1,74 +1,219 @@
-/* ===== NAVIGATION BAR ===== */
+// DOM Elements
 const slider = document.querySelector(".nav-slider");
 const tabs = document.querySelectorAll(".nav nav a");
+const defaultPage = "about";
+
 let index_value = 0;
 let left_position = 10;
 let isAnimating = false;
 
-// Function to handle tab clicks
-tabs.forEach((item, index) => {
-    item.onclick = function(event) {
-        event.preventDefault();
-
-        // Prevent animation overlap
-        if (isAnimating) return;
-        isAnimating = true;
-
-        // Reset active state of tabs
-        tabs.forEach(tab => tab.classList.remove("active"));
-        item.classList.add("active");
-
-        // Handle tab animation (hover effect)
-        let prevIndex = index_value;
-        index_value = index;
-
-        let start = Math.min(prevIndex, index);
-        let end = Math.max(prevIndex, index);
-
-        let delay = 40;
-
-        // Add hovered effect to each tab in the range
-        for (let i = start; i <= end; i++) {
-            setTimeout(() => { tabs[i].classList.add("hovered"); }, Math.abs(i - start) * delay);
-        }
-
-        // Remove hovered effect after animation
-        setTimeout(() => {
-            tabs.forEach(tab => {
-                if (!tab.classList.contains("active")) { tab.classList.remove("hovered"); }
-            });
-            isAnimating = false;
-        }, (end - start + 1) * delay);
-
-        // Update slider position based on the active tab width
-        get_left_position();
-        slider.style.width = item.clientWidth - 20 + "px";
-        slider.style.left = left_position + "px";
-        left_position = 10;
-
-        // Load the section related to the clicked tab
-        const section = item.getAttribute("onclick").match(/'([^']+)'/)[1]; 
-        loadSection(section);
-    };
+document.addEventListener("DOMContentLoaded", function () {
+    window.scrollTo(0, 0);
+    initNavigation();
+    loadInitialPage();
+    initRippleButtons();
+    applyGlobalRippleEffect();
+    applyInitialActiveButton();
 });
 
-// Function to calculate the left position of the slider based on active tab index
-function get_left_position() {
-    left_position = 10;
-    for (let i = 0; i < index_value; i++) { left_position += tabs[i].clientWidth; }
+// Initialize Navigation
+function initNavigation() {
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", function (event) {
+            event.preventDefault();
+            handleTabClick(tab, index);
+        });
+    });
+
+    // Handle back/forward navigation
+    window.onpopstate = function () {
+        const page = new URLSearchParams(window.location.search).get("page") || defaultPage;
+        loadSection(page);
+    };
 }
 
-// Function to load the content of a selected section dynamically
-function loadSection(section) {
-    fetch(`Pages/${section}.html`)
-        .then(response => response.text())
-        .then(data => {
-            // Update the content of the main page
-            document.getElementById('content').innerHTML = data;
-        }).catch(error => console.error("Error loading page:", error));
+// Load Initial Page from URL or Default
+function loadInitialPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get("page") || defaultPage;
+    loadSection(page);
 }
-// Function to scroll to target spot
+
+// Load Page Content Dynamically
+function loadSection(page) {
+    const contentContainer = document.getElementById("content");
+    fetch(`Pages/${page}.html`)
+        .then(response => {
+            if (!response.ok) throw new Error("Page not found");
+            return response.text();
+        })
+        .then(data => {
+            contentContainer.innerHTML = data;
+            history.pushState({}, "", `?page=${page}`);
+            window.scrollTo(0, 0);
+            updateNavSlider(page);
+            setActiveTab(page);
+            applyGlobalRippleEffect();
+        })
+        .catch(error => {
+            contentContainer.innerHTML = "<h2>Page not found</h2>";
+            console.error("Error loading page:", error);
+        });
+}
+
+// Handle Tab Click
+function handleTabClick(tab, index) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // Reset active state
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    // Animate Tabs
+    animateTabs(index);
+
+    // Update slider position
+    updateSliderPosition(tab);
+
+    // Load Section
+    const section = tab.getAttribute("onclick").match(/'([^']+)'/)[1];
+    loadSection(section);
+}
+
+// Animate Tabs Hover Effect
+function animateTabs(newIndex) {
+    let prevIndex = index_value;
+    index_value = newIndex;
+    let start = Math.min(prevIndex, newIndex);
+    let end = Math.max(prevIndex, newIndex);
+    let delay = 40;
+
+    for (let i = start; i <= end; i++) {
+        setTimeout(() => { tabs[i].classList.add("hovered"); }, Math.abs(i - start) * delay);
+    }
+
+    setTimeout(() => {
+        tabs.forEach(tab => {
+            if (!tab.classList.contains("active")) {
+                tab.classList.remove("hovered");
+            }
+        });
+        isAnimating = false;
+    }, (end - start + 1) * delay);
+}
+
+// Update Slider Position
+function updateSliderPosition(tab) {
+    getLeftPosition();
+    slider.style.width = tab.clientWidth - 20 + "px";
+    slider.style.left = left_position + "px";
+    left_position = 10;
+}
+
+// Calculate Left Position for Slider
+function getLeftPosition() {
+    left_position = 10;
+    for (let i = 0; i < index_value; i++) {
+        left_position += tabs[i].clientWidth;
+    }
+}
+
+// Update Active Tab Styling
+function setActiveTab(activePage) {
+    tabs.forEach(link => {
+        const section = link.getAttribute("onclick").match(/'([^']+)'/)[1];
+        link.classList.toggle("active", section === activePage);
+    });
+}
+
+// Update Slider Position Based on Active Tab
+function updateNavSlider(activePage) {
+    tabs.forEach(link => {
+        const section = link.getAttribute("onclick").match(/'([^']+)'/)[1];
+        if (section === activePage) {
+            slider.style.left = `${link.offsetLeft + 10}px`;
+            slider.style.width = `${link.offsetWidth - 20}px`;
+        }
+    });
+}
+
+// Global Button Click Effect
+function addRippleEffect(button) {
+    button.addEventListener('mousedown', function() {
+        let ripple = document.createElement('div');
+        ripple.classList.add('ripple-effect');
+        button.appendChild(ripple);
+
+        // Trigger animation immediately
+        requestAnimationFrame(() => {
+            ripple.classList.add('animate');
+        });
+
+        // Remove ripple after transition
+        ripple.addEventListener('transitionend', function() {
+            ripple.remove();
+        });
+    });
+}
+
+// Apply Ripple Effect to All Buttons
+function applyGlobalRippleEffect() {
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach(button => {
+        addRippleEffect(button);
+    });
+}
+
+// Number Navigation Button Activation
+function activateNumberButton(button) {
+    const numberButtons = document.querySelectorAll('.educationHTML .number-nav button');
+    numberButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
+// Apply Initial Active Button and Ripple Effect
+function applyInitialActiveButton() {
+    const firstButton = document.querySelector('.educationHTML .number-nav button:first-child');
+    if (firstButton) {
+        activateNumberButton(firstButton);
+
+        // Manually trigger the ripple effect
+        let ripple = document.createElement('div');
+        ripple.classList.add('ripple-effect');
+        firstButton.appendChild(ripple);
+
+        requestAnimationFrame(() => {
+            ripple.classList.add('animate');
+        });
+
+        ripple.addEventListener('transitionend', function() {
+            ripple.remove();
+        });
+    }
+}
+
+// Scroll to Target Spot and Activate Button
 function scrollToSpot(spotNumber) {
-    let number_scroll = document.getElementById("spot" + spotNumber);
-    number_scroll.scrollIntoView({ behavior: "smooth", block: "center" });
+    let target = document.getElementById("spot" + spotNumber);
+    if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        const button = document.querySelector(`.educationHTML .number-nav button:nth-child(${spotNumber})`);
+        if (button) {
+            activateNumberButton(button);
+        }
+    }
+}
+
+// Function to scroll to any section by its ID, usable in HTML onclick
+function scrollToElement(elementId, offset = 100) {
+    let target = document.getElementById(elementId);
+    if (target) {
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = targetPosition - offset;
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
 }

@@ -1,26 +1,36 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, url=about.html">
         <title>My Portfolio</title>
         <link rel="stylesheet" href="style.css">
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    </head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap">
+        <link rel="preload" href="\Images\WEBP\Planet.webp" as="image">
+        <link rel="preload" href="\Images\WEBP\Tents.webp" as="image">
+        <link rel="preload" href="\Images\WEBP\Hungary.webp" as="image">
+        <link rel="preload" href="\Images\WEBP\Kazakhstan.webp" as="image">
+        <link rel="preload" href="\Images\WEBP\USA.webp" as="image">
+        <link rel="preload" href="\Images\WEBP\Kyrgyzstan.webp" as="image">
     <body>
+        <div class="name">ISKENDER</div>
+        
         <div class="nav" id="navbar">
             <nav>
                 <a class="about" href="#" onclick="loadSection('about')">ABOUT ME</a>
                 <a class="contact" href="#" onclick="loadSection('contact')">CONTACTS</a>
                 <a class="experience" href="#" onclick="loadSection('experience')">EXPERIENCE</a>
                 <a class="education" href="#" onclick="loadSection('education')">EDUCATION</a>
-                <a class="personal" href="#" onclick="loadSection('personal')">MY LIFE</a>
+                <a class="life" href="#" onclick="loadSection('life')">MY LIFE</a>
                 <a class="knowledge" href="#" onclick="loadSection('knowledge')">KNOWLEDGE</a>
                 <span class="nav-slider"></span>
             </nav>
         </div>
+
         <div class="container">
             <div id="content"></div>
         </div>
+
         <script src="script.js"></script>
     </body>
 </html>
