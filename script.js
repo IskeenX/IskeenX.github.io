@@ -1,19 +1,21 @@
 // DOM Elements
 const slider = document.querySelector(".nav-slider");
 const tabs = document.querySelectorAll(".nav nav a");
+const countryNameDisplay = document.getElementById('country-name');
+const countries = document.querySelectorAll(".world-map path");
 const defaultPage = "about";
 
-let index_value = 0;
+let index_value = 0;                            
 let left_position = 10;
 let isAnimating = false;
 
 document.addEventListener("DOMContentLoaded", function () {
-    window.scrollTo(0, 0);
+    history.scrollRestoration = 'manual';
     initNavigation();
     loadInitialPage();
-    initRippleButtons();
     applyGlobalRippleEffect();
     applyInitialActiveButton();
+    setupMapHover();
 });
 
 // Initialize Navigation
@@ -50,7 +52,6 @@ function loadSection(page) {
         .then(data => {
             contentContainer.innerHTML = data;
             history.pushState({}, "", `?page=${page}`);
-            window.scrollTo(0, 0);
             updateNavSlider(page);
             setActiveTab(page);
             applyGlobalRippleEffect();
@@ -214,6 +215,24 @@ function scrollToElement(elementId, offset = 100) {
         window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
+        });
+    }
+}
+
+function setupMapHover() {
+    if (countries.length > 0) {
+        countries.forEach(path => {
+            path.addEventListener('mouseover', function () {
+                const countryName = this.getAttribute('name');
+                if (countryName) {
+                    countryNameDisplay.textContent = countryName;
+                    countryNameDisplay.classList.add('visible');
+                }
+            });
+
+            path.addEventListener('mouseout', function () {
+                countryNameDisplay.classList.remove('visible');
+            });
         });
     }
 }

@@ -27,16 +27,16 @@ body {
     --border: rgba(255, 255, 255, 0.221);
     --border-hover: rgba(255, 255, 255, 0.3);
     --shadow: rgba(0, 0, 0, 0.8);
+    --black-hover: rgba(0, 0, 0, 0.3);
     --white-1: rgb(255, 255, 255);
     --white-2: rgb(204, 204, 204);
+    --white-3: rgb(225, 225, 225);
     --grey-1: rgb(130, 130, 130);
     --grey-2: rgb(110, 110, 110);
+    --grey-3: rgb(53, 53, 53);
 }
 html {
-    padding-top: 100px;
     scroll-behavior: smooth !important;
-}
-html.no-touch {
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -47,7 +47,7 @@ h2 {
     padding-bottom: 5px;
 }
 h3 {
-    color: var(--white-2);
+    color: var(--white-3);
     font-size: 1.5rem;
     font-weight: 300;
     padding-bottom: 20px;
@@ -74,6 +74,12 @@ h3 {
     width: 300px;
     height: 300px;
     opacity: 0;
+}
+@font-face {
+    font-family: 'Millenia';
+    src: url('/Fonts/MilleniaPersonalUse-w1OB8.ttf') format('truetype');
+    font-weight: normal; /* Set the font weight */
+    font-style: normal; /* Set the font style */
 }
 /*#endregion */
 
@@ -139,12 +145,14 @@ h3 {
     left: 40px;
     font-size: 22px;
     font-weight: 600;
-    color: var(--background-2-hover);
+    color: var(--grey-3);
     padding: 5px 10px;
     border-radius: 5px;
-    z-index: 5;
+    z-index: 0;
     font-family: var(--name);
     text-rendering: optimizeLegibility;
+    font-family: "Millenia", cursive;
+    letter-spacing: 5px;
 }
 .nav {
     display: flex;
@@ -241,8 +249,6 @@ h3 {
     position: absolute;
     object-fit: cover;
     mix-blend-mode: screen;
-    height: auto;
-    width: 80%;
     top: 60%;
     left: 15%;
     filter: brightness(0.5);
@@ -490,7 +496,6 @@ h3 {
 
 /*#region ===== MY LIFE  */
 .lifeHTML {
-    line-height: 1.6;
     position: relative;
     padding: 150px 20px 50px 20px;
 }
@@ -498,121 +503,256 @@ h3 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 35%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(0.5);
+    filter: brightness(0.3);
+    mix-blend-mode: screen;
     mask-image: linear-gradient(to bottom, rgba(18, 18, 18, 1) 80%, rgba(18, 18, 18, 0));
 }
-.lifeHTML .glimpse {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 70px;
-    text-align: center;
+.lifeHTML .intro {
+    padding: 0 0 120px 0;
 }
-.lifeHTML .glimpse .content {
-    max-width: 1200px;
-    z-index: 1;
-}
-.lifeHTML .glimpse .content h3 {
-    font-size: 3.8em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 6px var(--shadow);
-    letter-spacing: 0.1em;
-    text-transform: none;
-    color: var(--white-1);
-    position: relative;
-}
-.lifeHTML .glimpse .content h3::before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
-    animation: Underline 2s ease-in-out infinite alternate;
-}
-.lifeHTML .glimpse .content p {
+.lifeHTML .intro p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em;
+    font-size: 19px;
     line-height: 1.9;
     text-shadow: 1px 1px 3px var(--shadow);
-    max-width: 700px;
+    max-width: 700px;   
+    color: var(--white-2);
+    font-style: italic;
+    padding: 10px 20px;
+    border-left: 1px solid var(--white-2);
     margin: 0 auto;
-    color: var(--white-1);
-    animation: fadeIn 1.2s ease-in-out;
 }
-.lifeHTML .glimpse .content button {
-    background: none;
-    border: 1px solid var(--white-1);
-    color: var(--white-1);
-    padding: 15px 30px;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-radius: 2px;
-    margin-top: 30px;
-    transition: 0.5s ease;
-}
-.lifeHTML .glimpse .content button:hover {
-    border: 1px solid var(--main);
-    background: var(--main);
-}
-.lifeHTML .life-section {
+.lifeHTML .life {
     margin-bottom: 50px;
+    padding: 40px;
 }
-.lifeHTML .life-section h2 {
+.lifeHTML .life .country {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: flex-start;
+    padding: 30px;
+    background: var(--background-3);
+    margin-left: 100px;
+    position: relative;
+}
+.lifeHTML .life .country::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    left: 26%;
+    width: 1px;
+    background-color: var(--border);
+}
+.lifeHTML .life .country .info {
+    flex: 0 0 30%;
+    min-width: 250px;
+    padding: 0 50px 0 40px;
+    text-align: left;
+    color: var(--white-2);
+}
+.lifeHTML .life .country .goal {
+    font-size: 35px;
+    color: var(--grey-3);
+    padding: 25px 0 35px 0;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    font-family: 'Millenia', cursive;
+    text-rendering: optimizeLegibility;
+}
+.lifeHTML .life .country p {
+    color: var(--white-2);
+}
+.lifeHTML .life .country .gallery {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-left: -30px;
+}
+.lifeHTML .life .country .gallery .image-container {
+    position: relative;
+    overflow: hidden;
+    width: 23%;
+    height: 270px;
+}
+.lifeHTML .life .country .gallery img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow);
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    image-rendering: optimizeQuality;
+}
+.lifeHTML .life .country .gallery .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--black-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-1);
+    font-size: 1.2em;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 8px var(--shadow);
+    padding: 20px;
+}
+.lifeHTML .life .country .gallery .image-container:hover img {
+    transform: scale(1.01);
+}
+.lifeHTML .life .country .gallery .image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+
+.world-map {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background-color: var(--background-2);
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+#country-name {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    pointer-events: none; /* Prevent interfering with hover */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+}
+#country-name.visible {
+    opacity: 1;
+}
+.world-map svg {
+    width: 100%;
+    height: 100%;
+}
+.world-map path {
+    fill: #443d4b;
+    stroke: #dcbfff;
+    transition: 100ms;
+}
+.world-map path:hover {
+    fill: #c99aff;
+} 
+
+
+
+.informatics-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.informatics-section h2 {
     font-size: 2.5em;
     margin-bottom: 30px;
-    text-align: center;
     color: var(--white-1);
 }
-.lifeHTML .gallery {
-    padding: 0 60px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+
+.informatics-tabs {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
-.lifeHTML .gallery img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 2px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+.tab-button {
+    background: var(--background-3);
+    border: 1px solid var(--border);
+    color: var(--white-1);
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-.lifeHTML .hobbies {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+
+.tab-button.active {
+    background: var(--main);
+}
+
+.tab-button:hover {
+    background: var(--main-hover);
+}
+
+.tab-content {
+    display: none;
+    padding: 30px;
+    background: var(--background-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     margin-bottom: 30px;
 }
-.lifeHTML .hobbies .hobby {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    width: 250px;
-    margin-bottom: 20px;
+
+.tab-content.active {
+    display: block;
 }
-.lifeHTML .hobbies .hobby i {
-    font-size: 2em;
-    margin-bottom: 15px;
-}
-.lifeHTML .milestones {
+
+.numbers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
-.lifeHTML .milestones .milestone {
-    background: rgba(0, 0, 0, 0.7);
+
+.number-item {
+    background: var(--background-2);
     padding: 20px;
     border-radius: 8px;
 }
+
+.number-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--main);
+}
+
+.number-label {
+    display: block;
+    margin-top: 10px;
+    color: var(--white-2);
+}
+
+.achievements-list,
+.plans-timeline,
+.ideas-list {
+    text-align: left;
+}
+
+.achievement-item,
+.plan-item,
+.idea-item {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: var(--background-2);
+    border-radius: 8px;
+}
+
+.plan-date {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--main);
+}
+
+/* Add more styles as needed */
 /*#endregion */
