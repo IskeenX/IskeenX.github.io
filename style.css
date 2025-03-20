@@ -10,6 +10,7 @@ body {
     color: var(--white-1);
     text-align: center;
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-width: none;
     align-items: center;
 }
@@ -27,13 +28,14 @@ body {
     --border: rgba(255, 255, 255, 0.221);
     --border-hover: rgba(255, 255, 255, 0.3);
     --shadow: rgba(0, 0, 0, 0.8);
-    --black-hover: rgba(0, 0, 0, 0.3);
+    --black-hover: rgba(0, 0, 0, 0.302);
     --white-1: rgb(255, 255, 255);
     --white-2: rgb(204, 204, 204);
     --white-3: rgb(225, 225, 225);
     --grey-1: rgb(130, 130, 130);
     --grey-2: rgb(110, 110, 110);
     --grey-3: rgb(53, 53, 53);
+    --yellow-1: rgb(255, 255, 179);
 }
 html {
     scroll-behavior: smooth !important;
@@ -74,6 +76,21 @@ h3 {
     width: 300px;
     height: 300px;
     opacity: 0;
+}
+.divider {
+    display: flex;
+    padding: 90px 0;
+    align-items: center;
+    margin: 1em -3em;
+    font-style: italic;
+    &:before,
+    &:after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      margin: 0 1em;
+      box-shadow: 0 0.5px 0 var(--grey-2);
+    }
 }
 @font-face {
     font-family: 'Millenia';
@@ -524,11 +541,10 @@ h3 {
     border-left: 1px solid var(--white-2);
     margin: 0 auto;
 }
-.lifeHTML .life {
-    margin-bottom: 50px;
-    padding: 40px;
+.lifeHTML .countries {
+    padding: 40px 40px 0 40px;
 }
-.lifeHTML .life .country {
+.lifeHTML .countries .country {
     display: flex;
     margin-bottom: 30px;
     align-items: flex-start;
@@ -537,7 +553,10 @@ h3 {
     margin-left: 100px;
     position: relative;
 }
-.lifeHTML .life .country::before {
+.lifeHTML .countries .country:last-child {
+    margin-bottom: 0;
+}
+.lifeHTML .countries .country::before {
     content: "";
     position: absolute;
     top: 30px;
@@ -546,14 +565,14 @@ h3 {
     width: 1px;
     background-color: var(--border);
 }
-.lifeHTML .life .country .info {
+.lifeHTML .countries .country .info {
     flex: 0 0 30%;
     min-width: 250px;
     padding: 0 50px 0 40px;
     text-align: left;
     color: var(--white-2);
 }
-.lifeHTML .life .country .goal {
+.lifeHTML .countries .country .goal {
     font-size: 35px;
     color: var(--grey-3);
     padding: 25px 0 35px 0;
@@ -563,10 +582,10 @@ h3 {
     font-family: 'Millenia', cursive;
     text-rendering: optimizeLegibility;
 }
-.lifeHTML .life .country p {
+.lifeHTML .countries .country p {
     color: var(--white-2);
 }
-.lifeHTML .life .country .gallery {
+.lifeHTML .countries .country .gallery {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
@@ -574,13 +593,13 @@ h3 {
     justify-content: flex-start;
     margin-left: -30px;
 }
-.lifeHTML .life .country .gallery .image-container {
+.lifeHTML .countries .country .gallery .image-container {
     position: relative;
     overflow: hidden;
     width: 23%;
     height: 270px;
 }
-.lifeHTML .life .country .gallery img {
+.lifeHTML .countries .country .gallery img {
     border-radius: 8px;
     box-shadow: 0 4px 8px var(--shadow);
     object-fit: cover;
@@ -591,7 +610,7 @@ h3 {
     will-change: transform;
     image-rendering: optimizeQuality;
 }
-.lifeHTML .life .country .gallery .image-overlay {
+.lifeHTML .countries .country .gallery .image-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -609,150 +628,88 @@ h3 {
     box-shadow: 0 4px 8px var(--shadow);
     padding: 20px;
 }
-.lifeHTML .life .country .gallery .image-container:hover img {
+.lifeHTML .countries .country .gallery .image-container:hover img {
     transform: scale(1.01);
 }
-.lifeHTML .life .country .gallery .image-container:hover .image-overlay {
+.lifeHTML .countries .country .gallery .image-container:hover .image-overlay {
     opacity: 1;
 }
-
-
-.world-map {
-    position: relative;
-    width: 80%;
-    height: 80%;
-    background-color: var(--background-2);
-    border: 1px solid var(--border);
+.lifeHTML .world-map {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.lifeHTML .world-map h2 {
+    font-size: 70px;
+    margin-bottom: 40px;
+    font-weight:bolder;
+    filter: brightness(0.3);
+}
+.lifeHTML .map {
+    width: 80%;
+    height: 80%;
     margin: 0 auto;
+    background: var(--background-3);
+    box-shadow: 0 3px 10px var(--black-hover);
 }
-#country-name {
+.lifeHTML .map .marks {
     position: absolute;
-    bottom: 20px; /* Adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1.2em;
-    pointer-events: none; /* Prevent interfering with hover */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s ease;
-}
-#country-name.visible {
-    opacity: 1;
-}
-.world-map svg {
-    width: 100%;
-    height: 100%;
-}
-.world-map path {
-    fill: #443d4b;
-    stroke: #dcbfff;
-    transition: 100ms;
-}
-.world-map path:hover {
-    fill: #c99aff;
-} 
-
-
-
-.informatics-section {
-    padding: 50px 20px;
+    bottom: 10px;
+    right: 160px;
+    padding: 10px 0;
     text-align: center;
-}
-
-.informatics-section h2 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    color: var(--white-1);
-}
-
-.informatics-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.tab-button {
+    z-index: 1;
     background: var(--background-3);
-    border: 1px solid var(--border);
-    color: var(--white-1);
-    padding: 10px 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
-
-.tab-button.active {
-    background: var(--main);
-}
-
-.tab-button:hover {
-    background: var(--main-hover);
-}
-
-.tab-content {
-    display: none;
-    padding: 30px;
-    background: var(--background-3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.numbers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.number-item {
-    background: var(--background-2);
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.number-value {
-    font-size: 2em;
-    font-weight: bold;
-    color: var(--main);
-}
-
-.number-label {
-    display: block;
-    margin-top: 10px;
+.lifeHTML .map .marks .mark {
+    display: inline-flex;
+    align-items: center;
     color: var(--white-2);
+    margin: 0 15px;
+}
+.lifeHTML .map .marks span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+.lifeHTML .map .marks .visited {
+    background-color: var(--main);
+    filter: brightness(0.7);
+}
+.lifeHTML .map .marks .to-visit {
+    background-color: var(--yellow-1);
+    filter: brightness(0.7);
+}
+.lifeHTML .map img {
+    position: relative;
+    object-fit: contain;
+    filter: brightness(0.7);
 }
 
-.achievements-list,
-.plans-timeline,
-.ideas-list {
-    text-align: left;
-}
 
-.achievement-item,
-.plan-item,
-.idea-item {
-    padding: 20px;
-    margin-bottom: 15px;
-    background: var(--background-2);
-    border-radius: 8px;
-}
 
-.plan-date {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+
+
+.facts {
+    background: var(--background-3);
+}
+.number-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.number {
+    font-size: 25px;
     color: var(--main);
+    border-radius: 50%;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-/* Add more styles as needed */
 /*#endregion */
