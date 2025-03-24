@@ -59,6 +59,12 @@ h3 {
     overflow: hidden;
     cursor: pointer;
 }
+.button:hover {
+    filter: brightness(1.5);
+}
+.button:active {
+    transform: scale(0.93);
+}
 .button .ripple-effect {
     content: '';
     position: absolute;
@@ -95,8 +101,8 @@ h3 {
 @font-face {
     font-family: 'Millenia';
     src: url('/Fonts/MilleniaPersonalUse-w1OB8.ttf') format('truetype');
-    font-weight: normal; /* Set the font weight */
-    font-style: normal; /* Set the font style */
+    font-weight: normal;
+    font-style: normal;
 }
 /*#endregion */
 
@@ -135,6 +141,9 @@ h3 {
         width: 70%;
     }
 }
+@keyframes typing {
+    from { width: 0;}
+}
 .AnimationScaleScroll {
     animation: AnimationScaleScroll 0.5s linear;
     animation-timeline: view();
@@ -151,6 +160,10 @@ h3 {
 }
 .AnimationToLeft {
     animation: AnimationToLeft 0.6s ease-out;
+    will-change: transform, opacity, scale;
+}
+.AnimateTyping {
+    animation: typing 2.5s;
     will-change: transform, opacity, scale;
 }
 /*#endregion */
@@ -184,18 +197,14 @@ h3 {
     width: 100%;
 }
 .nav nav {
-    background: transparent;
+    background: var(--background-3);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 44%;
     height: 53px;
-    border: 1px;
-    border-style: solid;
-    backdrop-filter: blur(30px);
-    border-color: var(--border);
-    opacity: 1;
+    border: 1px solid var(--border);
 }
 .nav nav .about { 
     width: 120%;
@@ -216,12 +225,10 @@ h3 {
     width: 130%; 
 }
 .nav nav a {
-    color: var(--grey-1);
     position: relative;
     display: inline-block;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 700;
     padding: 10px 0px;
     z-index: 2;
 }
@@ -238,8 +245,9 @@ h3 {
     transition: 0.4s ease;
 }
 .nav nav a:not(.active):not(a:hover) {
-    color: var(--grey-1);
+    color: var(--white-1);
     transition: 0.4s ease;
+    opacity: 0.6;
 }
 .nav nav span {
     background: var(--main);
@@ -254,13 +262,12 @@ h3 {
 
 /*#region ===== CONTACT ME */
 .contactHTML {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: transparent;
-    padding: 150px 20px 50px 20px;
+        position: relative;
+        margin: auto;
+        padding: 150px 20px 50px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 }
 .contactHTML .background-image {
     position: absolute;
@@ -278,10 +285,6 @@ h3 {
     max-width: 1200px;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
-}
-.contactHTML .contact-socials { 
-    width: 80%; 
 }
 .contactHTML .contact-socials {
     display: flex;
@@ -289,6 +292,7 @@ h3 {
     gap: 20px;
     align-items: end;
     padding-right: 50px;
+    width: 80%; 
 }
 .contactHTML .contact-socials .button {
     background: var(--background-3);
@@ -296,7 +300,6 @@ h3 {
     width: 60%;
     color: var(--white-1);
     transition: 0.5s ease;
-    border: 1px solid var(--border);
     align-items: center;
     border-radius: 2px;
     display: flex;
@@ -335,7 +338,7 @@ h3 {
     font-smooth: always;
 }
 .contactHTML .contact-socials .button:hover { 
-    border-color: var(--border-hover);
+    filter: brightness(1.5);
 }
 .contactHTML .contact-form { 
     width: 80%; 
@@ -344,7 +347,6 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    border: 1px solid var(--border);
     padding-inline: 50px;
     padding-block: 50px;
     width: 85vh;
@@ -373,17 +375,19 @@ h3 {
 .contactHTML .contact-form .form .input:focus { 
     outline: none; 
 }
-.contactHTML .contact-form .form .button {
+.contactHTML .contact-form .form button {
     padding: 15px;
-    background: var(--background-1);
-    color: var(--white-1);
-    border: none;
-    transition: 0.3s;
+    background: transparent;
+    color: var(--main);
+    border: 1px solid var(--main);
+    transition: 0.4s ease;
     font: 17px sans-serif;
     border-radius: 2px;
+    box-shadow: inset 0 0 0 0 var(--main);
 }
-.contactHTML .contact-form .form .button:hover { 
-    background: var(--main); 
+.contactHTML .contact-form .form button:hover { 
+    box-shadow: inset 0 -60px 0 0 var(--main);
+    color: var(--white-1);
 }
 /*#endregion */
 
@@ -423,7 +427,6 @@ h3 {
     width: 43%;
     background: var(--background-3);
     padding: 25px 50px 50px 50px;
-    border: 1px solid var(--border);
     list-style-position: inside;
     border-radius: 2px;
 }
@@ -514,6 +517,7 @@ h3 {
 /*#region ===== MY LIFE  */
 .lifeHTML {
     position: relative;
+    margin: auto;
     padding: 150px 20px 50px 20px;
 }
 .lifeHTML .background-image {
@@ -527,22 +531,24 @@ h3 {
     mask-image: linear-gradient(to bottom, rgba(18, 18, 18, 1) 80%, rgba(18, 18, 18, 0));
 }
 .lifeHTML .intro {
-    padding: 0 0 120px 0;
+    padding: 0 0 80px 0;
+    display: inline-block;
 }
 .lifeHTML .intro p {
     font-family: 'Montserrat', sans-serif;
     font-size: 19px;
     line-height: 1.9;
     text-shadow: 1px 1px 3px var(--shadow);
-    max-width: 700px;   
-    color: var(--white-2);
+    color: var(--white-3);
     font-style: italic;
     padding: 10px 20px;
     border-left: 1px solid var(--white-2);
-    margin: 0 auto;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .lifeHTML .countries {
-    padding: 40px 40px 0 40px;
+    padding: 40px 75px 0 40px;
 }
 .lifeHTML .countries .country {
     display: flex;
@@ -584,6 +590,8 @@ h3 {
 }
 .lifeHTML .countries .country p {
     color: var(--white-2);
+    font-size: 0.95rem;
+    padding-right: 50px;
 }
 .lifeHTML .countries .country .gallery {
     flex: 1;
@@ -603,7 +611,7 @@ h3 {
     border-radius: 8px;
     box-shadow: 0 4px 8px var(--shadow);
     object-fit: cover;
-    filter: brightness(0.8);
+    filter: brightness(0.75);
     transition: transform 0.3s ease;
     width: 100%;
     height: 100%;
@@ -662,6 +670,7 @@ h3 {
     text-align: center;
     z-index: 1;
     background: var(--background-3);
+    font-size: 0.95rem;
 }
 .lifeHTML .map .marks .mark {
     display: inline-flex;
@@ -689,20 +698,15 @@ h3 {
     object-fit: contain;
     filter: brightness(0.7);
 }
-
-
-
-
-
-.facts {
+/* .lifeHTML .facts {
     background: var(--background-3);
 }
-.number-list {
+.lifeHTML .number-list {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.number {
+.lifeHTML .number {
     font-size: 25px;
     color: var(--main);
     border-radius: 50%;
@@ -711,5 +715,110 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+/*#endregion */
+
+/*#region ===== KNOWLEDGE  */
+.knowledgeHTML {
+    position: relative;
+    max-width: 90%;
+    margin: auto;
+    padding: 150px 20px 50px 20px;
+}
+.knowledgeHTML .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.knowledgeHTML .category {
+    background-color: var(--background-2);
+    padding: 30px;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px var(--shadow);
+}
+.knowledgeHTML .category .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px 0 40px 0;    
+    width: 100%;
+}
+.knowledgeHTML .category .header h3 {
+    font-size: 1.1rem;
+    padding: 0;
+    height: 25.5px;
+}
+.knowledgeHTML .category .icon {
+    font-size: 1.1em;
+    color: var(--main);
+}
+.knowledgeHTML .category .list {
+    list-style: none;
+    padding: 0;
+}
+.knowledgeHTML .category .list li {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.knowledgeHTML .category .list .skill-name {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    display: block;
+}
+.knowledgeHTML .category .list .skill-bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.knowledgeHTML .category .list .skill-progress {
+    height: 100%;
+    background-color: var(--main);
+}
+.knowledgeHTML .category .load-more {
+    background: var(--background-3);
+    color: var(--grey-1);
+    padding: 5px 10px;
+    border: 1px solid var(--grey-1);
+    border-radius: 2px;
+    margin-top: 15px;
+}
+.knowledgeHTML .category .list .hidden-skill {
+    display: none;
+}
+.knowledgeHTML .expanded {
+    z-index: 10;
+    height: auto;
+}
+.knowledgeHTML .articles {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--background-2);
+    margin-top: 40px;
+    border-radius: 10px;
+}
+.knowledgeHTML .articles h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: var(--main);
+}
+.knowledgeHTML .articles .list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.knowledgeHTML .articles .item {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+.knowledgeHTML .articles .item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.knowledgeHTML .articles .link {
+    color: var(--main);
+    text-decoration: none;
 }
 /*#endregion */

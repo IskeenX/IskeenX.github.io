@@ -1,12 +1,11 @@
-// DOM Elements
 const slider = document.querySelector(".nav-slider");
 const tabs = document.querySelectorAll(".nav nav a");
 const defaultPage = "about";
-
 let index_value = 0;                            
 let left_position = 10;
 let isAnimating = false;
 
+// Event Listener
 document.addEventListener("DOMContentLoaded", function () {
     history.scrollRestoration = 'manual';
     initNavigation();
@@ -52,6 +51,7 @@ function loadSection(page) {
             updateNavSlider(page);
             setActiveTab(page);
             applyGlobalRippleEffect();
+            initializeLoadMoreSkills();
         })
         .catch(error => {
             contentContainer.innerHTML = "<h2>Page not found</h2>";
@@ -203,7 +203,7 @@ function scrollToSpot(spotNumber) {
     }
 }
 
-// Function to scroll to any section by its ID, usable in HTML onclick
+// Function to Scroll to Any Section by Its ID, Usable in HTML onclick(scrollToElement(ID))
 function scrollToElement(elementId, offset = 100) {
     let target = document.getElementById(elementId);
     if (target) {
@@ -214,4 +214,18 @@ function scrollToElement(elementId, offset = 100) {
             behavior: 'smooth'
         });
     }
+}
+
+// Function to Load More Skills on Press of a Button
+function initializeLoadMoreSkills() {
+    document.querySelectorAll('.knowledgeHTML .category .load-more').forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.closest('.knowledgeHTML .category .category-content');
+            const hiddenSkills = category.querySelectorAll('.knowledgeHTML .category .list .hidden-skill');
+            hiddenSkills.forEach(skill => {
+                skill.style.display = 'block';
+            });
+            category.classList.add("expanded");
+        });
+    });
 }
