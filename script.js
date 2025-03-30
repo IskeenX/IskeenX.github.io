@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadInitialPage();
     applyGlobalRippleEffect();
     applyInitialActiveButton();
+    initializeSkillsSection();
 });
 
 // Initialize Navigation
@@ -51,7 +52,9 @@ function loadSection(page) {
             updateNavSlider(page);
             setActiveTab(page);
             applyGlobalRippleEffect();
-            initializeLoadMoreSkills();
+            if (page === "knowledge") {
+                initializeSkillsSection();
+            }
         })
         .catch(error => {
             contentContainer.innerHTML = "<h2>Page not found</h2>";
@@ -216,16 +219,123 @@ function scrollToElement(elementId, offset = 100) {
     }
 }
 
-// Function to Load More Skills on Press of a Button
-function initializeLoadMoreSkills() {
-    document.querySelectorAll('.knowledgeHTML .category .load-more').forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.closest('.knowledgeHTML .category .category-content');
-            const hiddenSkills = category.querySelectorAll('.knowledgeHTML .category .list .hidden-skill');
-            hiddenSkills.forEach(skill => {
-                skill.style.display = 'block';
+// Initialize Skills Section
+function initializeSkillsSection() {
+    const skillsData = {
+        soft: [
+            { name: "Problem Solving", level: 90 },
+            { name: "Communication", level: 95 },
+            { name: "Teamwork", level: 85 },
+            { name: "Time Management", level: 80 },
+            { name: "Critical Thinking", level: 88 }
+        ],
+        frameworks: [
+            { name: "React", level: 85 },
+            { name: "Node.js", level: 80 },
+            { name: "Express.js", level: 75 },
+            { name: "jQuery", level: 60 },
+            { name: "Bootstrap", level: 90 }
+        ],
+        technologies: [
+            { name: "Git", level: 90 },
+            { name: "VS Code", level: 95 },
+            { name: "Docker", level: 70 },
+            { name: "Linux", level: 80 },
+            { name: "Firebase", level: 60 }
+        ],
+        hobbies: [
+            { name: "Coding Challenges", level: 80 },
+            { name: "Photography", level: 75 },
+            { name: "Playing Musical Instruments", level: 60 },
+            { name: "Reading", level: 85 },
+            { name: "Hiking", level: 90 }
+        ],
+        databases: [
+            { name: "MySQL", level: 85 },
+            { name: "MongoDB", level: 80 },
+            { name: "PostgreSQL", level: 75 },
+            { name: "SQLite", level: 90 }
+        ],
+        cloud: [
+            { name: "AWS", level: 70 },
+            { name: "Google Cloud Platform", level: 65 },
+            { name: "Azure", level: 60 },
+            { name: "Firebase", level: 80 }
+        ]
+    };
+
+    function renderSkills(skills, listElement, searchTerm = '') {
+        const lowerSearchTerm = searchTerm.toLowerCase();
+    
+        listElement.innerHTML = skills.map(skill => {
+            let highlightedName = skill.name;
+    
+            if (searchTerm) {
+                const words = skill.name.toLowerCase().split(' ');
+                words.forEach(word => {
+                    if (word.startsWith(lowerSearchTerm)) {
+                        const startIndex = skill.name.toLowerCase().indexOf(word);
+                        const endIndex = startIndex + searchTerm.length;
+                        const before = skill.name.substring(0, startIndex);
+                        const match = skill.name.substring(startIndex, endIndex);
+                        const after = skill.name.substring(endIndex);
+    
+                        highlightedName = `${before}<span class="highlight">${match}</span>${after}`;
+                    }
+                });
+            }
+    
+            return `
+                <li>
+                    <span class="skill-name">${highlightedName}</span>
+                    <div class="indicator">
+                        <div class="progress" style="width: ${skill.level}%;"></div>
+                    </div>
+                </li>
+            `;
+        }).join('');
+    }
+
+    function renderAllSkills() {
+        const allSkills = Object.values(skillsData).flat().sort((a, b) => a.name.localeCompare(b.name));
+        renderSkills(allSkills, document.querySelector('.knowledgeHTML .knowledge .skills .list .skill-all'));
+    }
+
+    function filterSkills(searchTerm, skills) {
+        const lowerSearchTerm = searchTerm.toLowerCase();
+        return skills.filter(skill => {
+            const words = skill.name.toLowerCase().split(' ');
+            return words.some(word => word.startsWith(lowerSearchTerm));
+        }).sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    function setupTabs() {
+        const tabButtons = document.querySelectorAll('.knowledgeHTML .knowledge .skills .tabs button');
+        const tabContents = document.querySelectorAll('.knowledgeHTML .knowledge .skills .list ul');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const tab = this.dataset.tab;
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelector(`.knowledgeHTML .knowledge .skills .list .skill-${tab}`).classList.add('active');
             });
-            category.classList.add("expanded");
         });
-    });
+    }
+
+    function setupSearch() {
+        const searchInput = document.querySelector('.knowledgeHTML .knowledge .skills .search input');
+        searchInput.addEventListener('input', function () {
+            const searchTerm = this.value;
+            const activeTab = document.querySelector('.knowledgeHTML .knowledge .skills .list ul.active').dataset.tab;
+            const skills = activeTab === 'all' ? Object.values(skillsData).flat() : skillsData[activeTab];
+            const filteredSkills = filterSkills(searchTerm, skills);
+            renderSkills(filteredSkills, document.querySelector(`.knowledgeHTML .knowledge .skills .list .skill-${activeTab}`), searchTerm);
+        });
+    }
+    renderAllSkills();
+    Object.keys(skillsData).forEach(tab => renderSkills(skillsData[tab], document.querySelector(`.knowledgeHTML .knowledge .skills .list .skill-${tab}`)));
+    setupTabs();
+    setupSearch();
 }
